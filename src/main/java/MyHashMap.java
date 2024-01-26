@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.Objects;
 
 /**
@@ -31,7 +32,9 @@ public class MyHashMap<K,V> {
     }
 
     // метод вычисляет значение хэш
-    private int hashCode(K key) {
+    public int hashCode(K key) {
+        if (key == null)
+            return 0;
         return Objects.hash(key);
     }
 
@@ -73,16 +76,21 @@ public class MyHashMap<K,V> {
         return table[bucket].remove(hash, key);
     }
 
-    /**
-     * Переопределённый метод toString
-     * @return - возвращает всю таблицу с каждой ячейкой (bucket) построчно
-     */
-    @Override
-    public String toString() {
-        for (int i = 0; i < cap; i++) {
-            System.out.println(table[i]);
-        }
-        return "";
+//    /**
+//     * Переопределённый метод toString
+//     * @return - возвращает всю таблицу с каждой ячейкой (bucket) построчно
+//     */
+//    @Override
+//    public String toString() {
+//        for (int i = 0; i < cap; i++) {
+//            System.out.println(table[i]);
+//        }
+//        return "";
+//    }
+
+    public void clear() {
+        for (int i = 0; i < cap; i++)
+            table[i] = new Bucket<>();
     }
 
     // класс, представляющий собой связный список узлов для хранения записей
